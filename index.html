@@ -177,7 +177,8 @@ if(q&&q.close){var i=c.querySelector("input");i.value=parseFloat(q.close);i.disp
 lv.textContent="اتحدّث "+new Date().toLocaleTimeString("ar-EG");
 try{var r2=await fetch("https://api.twelvedata.com/quote?symbol=COMI,TMGH,FWRY&exchange=EGX&apikey="+encodeURIComponent(key));var j2=await r2.json(),n=0;
 document.querySelectorAll(".cd").forEach(function(c){var t=c.querySelector("small").textContent,q=j2[t]||(j2.symbol===t?j2:null);if(q&&q.close){var i=c.querySelector("input");i.value=parseFloat(q.close);i.dispatchEvent(new Event("change"));n++}});
-if(!n)lv.textContent+=" (الأسهم المصرية مش متاحة بالخطة المجانية، اكتبها بإيدك)"}catch(e){}}
+if(!n){for(const t of ["COMI","TMGH","FWRY"]){try{var r3=await fetch("https://api.allorigins.win/raw?url="+encodeURIComponent("https://query1.finance.yahoo.com/v8/finance/chart/"+t+".CA"));var j3=await r3.json();var m=j3.chart.result[0].meta;if(m.regularMarketPrice){document.querySelectorAll(".cd").forEach(function(c){if(c.querySelector("small").textContent===t){var i=c.querySelector("input");i.value=m.regularMarketPrice;i.dispatchEvent(new Event("change"));n++}})}}catch(e){}}
+if(!n)lv.textContent+=" (الأسهم المصرية ما اتحدّثتش، اكتبها بإيدك)"}}catch(e){}}
 catch(e){lv.textContent="مش قادر أتصل. افتح الملف من جهازك مش من لينك Claude."}}
 document.getElementById("live").onclick=function(){go();clearInterval(timer);timer=setInterval(go,120000)};
 })();
