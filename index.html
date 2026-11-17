@@ -34,24 +34,37 @@ ul,ol{padding-inline-start:20px;margin:6px 0}
 .up{color:#15803d;font-weight:700}.dn{color:#dc2626;font-weight:700}
 button{background:var(--ac);color:var(--bg);border:0;border-radius:10px;padding:10px 14px;font-size:1rem;margin-top:10px}
 #ai{white-space:pre-wrap;margin-top:10px}
+.tabs{display:flex;gap:6px;overflow-x:auto;position:sticky;top:0;background:var(--bg);padding:8px 0;z-index:5}
+.tabs button{margin:0;white-space:nowrap;background:var(--card);color:var(--tx);border:1px solid var(--ln);padding:8px 12px;font-size:.9rem}
+.tabs button.on{background:var(--ac);color:var(--bg)}
+[data-tab]{display:none}[data-tab].on{display:block}
 </style>
 </head>
 <body>
 <main>
 <h1><span class="ico">📊</span> مذكرة الثقافة المالية الشاملة</h1>
+<nav class="tabs" id="tb"><button data-go="prices">📈 الأسعار</button><button data-go="helper">🧭 المساعد</button><button data-go="companies">🏢 الشركات</button><button data-go="habits">💰 السلوكيات</button><button data-go="sharia">☪️ الشرعي</button><button data-go="plan">✅ الخطة</button></nav>
 <p class="sub">نسخة تعليمية، مش نصيحة استثمارية. الأسعار واتجاه الأسهم بيتغير، راجع الأرقام الحية قبل أي قرار.</p>
 
-<section>
+<section data-tab="prices">
 <h2>📈 لوحة المتابعة والقرار</h2>
 <p class="sub">اكتب سعر السهم الحالي في كل كارت. الصفحة بتحفظه وتقارنه بآخر سعر كتبته وتقولك طالع ⬆️ ولا نازل ⬇️. الرسومات أيقونات عامة للمنظر مش شعارات حقيقية.</p>
-<div class="news"><b>🗞️ تحديث 17 نوفمبر 2026 (أسعار إغلاق الاثنين 16)</b>
+<div class="news"><b>🗞️ تحديث 17 نوفمبر 2026</b>
 <ul>
 <li>إنفيديا: النهارده الثلاثاء 17 نوفمبر نتائجها بعد إغلاق السوق (حوالي 11:20 مساءً بتوقيت القاهرة)، وهي أول نتائج بعد استقالة جنسن هوانج. كوليت كريس هي الرئيس التنفيذي المؤقت.</li>
 <li>السوق الأمريكي: الأسهم نزلت الاثنين وناسداك خسر أكتر من 2٪ مع بيع في الرقائق. وعوائد السندات فوق 5٪.</li>
-<li>مصر: مؤشر EGX30 كان حوالي 52,483 نقطة يوم 10 نوفمبر، يعني زيادة حوالي 25٪ من أول السنة. ولقيت إن البورصة بدأت عقود مستقبلية على CIB وطلعت مصطفى.</li>
+<li>مصر (الثلاثاء 17 نوفمبر الصبح): مؤشر EGX30 نازل حوالي 0.36٪ لقرابة 52,010 نقطة، والمصريين بيبيعوا والعرب والأجانب بيشتروا. الدولار حوالي 53.7 جنيه في البنوك.</li>
 </ul>
 <small class="sub">أرقام الاثنين لحظية وبتتغير. ولقيتش سعر موثوق ليوم 16 نوفمبر للأسهم المصرية ولا لجوجل.</small></div>
 <div class="grid" id="g"></div>
+<div class="note"><b>🔌 تحديث تلقائي (لازم تفتح الملف من جهازك أو موقعك، مش من اللينك)</b><br>
+الصق مفتاح Twelve Data المجاني:<br><input id="key" placeholder="API key" style="width:100%;box-sizing:border-box;padding:6px;margin-top:6px;border:1px solid var(--ln);border-radius:8px;background:var(--bg);color:var(--tx)">
+<button id="live">شغّل التحديث التلقائي</button> <span id="lv"></span></div>
+
+<p class="note">مهم: الصفحة المنشورة مش بتقدر تجيب أسعار حية أو أخبار من الإنترنت لوحدها، فالأسعار بتدخلها إنت. لو عايز تحديث بالأسعار والأخبار الحالية، ابعتلي هنا في المحادثة وأنا أدور وأحدّث. الشرح مش نصيحة استثمارية.</p>
+</section>
+<section data-tab="helper">
+<h2>🧭 المساعد</h2>
 <div class="note" style="border-top:0">
 <b>🧭 المساعد: أختار إيه وأبعد عن إيه؟</b><br>
 أنا أقدر أتحمل خسارة:
@@ -61,13 +74,8 @@ button{background:var(--ac);color:var(--bg);border:0;border-radius:10px;padding:
 <div id="av" style="white-space:pre-wrap;margin-top:10px"></div></div>
 <button id="ask" hidden>اسألني: أعمل إيه؟ 🤔</button>
 <div id="ai"></div>
-<div class="note"><b>🔌 تحديث تلقائي (لازم تفتح الملف من جهازك أو موقعك، مش من اللينك)</b><br>
-الصق مفتاح Twelve Data المجاني:<br><input id="key" placeholder="API key" style="width:100%;box-sizing:border-box;padding:6px;margin-top:6px;border:1px solid var(--ln);border-radius:8px;background:var(--bg);color:var(--tx)">
-<button id="live">شغّل التحديث التلقائي</button> <span id="lv"></span></div>
-
-<p class="note">مهم: الصفحة المنشورة مش بتقدر تجيب أسعار حية أو أخبار من الإنترنت لوحدها، فالأسعار بتدخلها إنت. لو عايز تحديث بالأسعار والأخبار الحالية، ابعتلي هنا في المحادثة وأنا أدور وأحدّث. الشرح مش نصيحة استثمارية.</p>
 </section>
-<section>
+<section data-tab="companies">
 <h2>١) الشركات بتبيع إيه، وإيه اللي بيحرك سهمها</h2>
 <h3>🇺🇸 البورصة الأمريكية</h3>
 <div class="scroll"><table>
@@ -93,7 +101,7 @@ button{background:var(--ac);color:var(--bg);border:0;border-radius:10px;padding:
 <p class="note">ما فيش جدول بيقول "طالع" أو "نازل" ثابت: ده بيتغير يومياً. اللي بنتعلمه هنا هو <b>ليه</b> السهم بيتحرك.</p>
 </section>
 
-<section>
+<section data-tab="habits">
 <h2>٢) السلوكيات المالية اليومية</h2>
 <div class="scroll"><table>
 <tr><th>عادة بتضيع الفلوس</th><th>البديل الذكي</th></tr>
@@ -106,7 +114,7 @@ button{background:var(--ac);color:var(--bg);border:0;border-radius:10px;padding:
 </table></div>
 </section>
 
-<section>
+<section data-tab="sharia">
 <h2>٣) البوصلة الشرعية</h2>
 <p><b>شروط الأسهم الحلال (المعايير الشائعة):</b></p>
 <ul>
@@ -118,7 +126,7 @@ button{background:var(--ac);color:var(--bg);border:0;border-radius:10px;padding:
 <p class="note">أمثلة: البنك التجاري الدولي (بنك تقليدي) وإيسترن (تبغ) مش مناسبين شرعياً. أي شركة تانية لازم تتراجع على <b>مؤشر EGX 33 الشرعي</b> أو تطبيقات فحص شرعي (مثل Musaffa) أو رأي جهة شرعية موثوقة، لأن الأرقام بتتغير كل ربع سنة.</p>
 </section>
 
-<section>
+<section data-tab="plan">
 <h2>٤) خطة عمل تبدأ بيها النهاردة</h2>
 <ol>
 <li>سجّل مصاريفك أسبوع واحد بس، من غير ما تغيّر حاجة.</li>
@@ -142,7 +150,7 @@ button{background:var(--ac);color:var(--bg);border:0;border-radius:10px;padding:
 <script>
 (function(){
 var L=[["NVDA","إنفيديا","chip"],["MSFT","مايكروسوفت","win"],["AAPL","آبل","phone"],["GOOGL","جوجل","search"],["TSLA","تسلا","car"],["COMI","التجاري الدولي","bank"],["TMGH","طلعت مصطفى","home"],["FWRY","فوري","pay"]];
-var SN={NVDA:["dn","162.85$ إغلاق 13 نوفمبر (−2.01٪). الاثنين حوالي 155$ (−4.5٪)"],MSFT:["up","523.88$ إغلاق 13 نوفمبر (+0.17٪). الاثنين حوالي −0.6٪"],AAPL:["up","356.27$ إغلاق 13 نوفمبر (+0.39٪). الاثنين حوالي −1.2٪"],GOOGL:["dn","الاثنين حوالي −3.4٪. سعر الإغلاق مش متاكد منه"],COMI:["nt","128.82 جنيه إغلاق الاثنين 16 نوفمبر"],TMGH:["dn","83.88 جنيه إغلاق الاثنين 16 نوفمبر (−0.67٪)"],TSLA:["dn","390.22$ إغلاق 13 نوفمبر (−1.82٪). الاثنين حوالي −3.4٪"]};
+var SN={NVDA:["dn","162.85$ إغلاق 13 نوفمبر (−2.01٪). الاثنين حوالي 155$ (−4.5٪)"],MSFT:["up","523.88$ إغلاق 13 نوفمبر (+0.17٪). الاثنين حوالي −0.6٪"],AAPL:["up","356.27$ إغلاق 13 نوفمبر (+0.39٪). الاثنين حوالي −1.2٪"],GOOGL:["dn","الاثنين حوالي −3.4٪. سعر الإغلاق مش متاكد منه"],COMI:["dn","128.79 جنيه الثلاثاء 17 نوفمبر الصبح (−0.02٪)"],TMGH:["dn","83.20 جنيه الثلاثاء 17 نوفمبر الصبح (−0.81٪)"],TSLA:["dn","390.22$ إغلاق 13 نوفمبر (−1.82٪). الاثنين حوالي −3.4٪"]};
 var EG={COMI:1,TMGH:1,FWRY:1};
 var D={};try{D=JSON.parse(localStorage.getItem("wl")||"{}")}catch(e){}
 function save(){try{localStorage.setItem("wl",JSON.stringify(D))}catch(e){}}
@@ -188,7 +196,7 @@ document.getElementById("live").onclick=function(){go();clearInterval(timer);tim
 var N={NVDA:"إنفيديا",MSFT:"مايكروسوفت",AAPL:"آبل",GOOGL:"جوجل",TSLA:"تسلا",COMI:"التجاري الدولي",TMGH:"طلعت مصطفى",FWRY:"فوري"};
 var EGX={COMI:1,TMGH:1,FWRY:1};
 var P={NVDA:{r:3,s:"غالباً",n:"نتائجها 17 نوفمبر ممكن تقلب السهم"},MSFT:{r:2,s:"غالباً"},AAPL:{r:2,s:"غالباً"},GOOGL:{r:2,s:"غالباً"},TSLA:{r:3,s:"غالباً"},COMI:{r:2,s:"لا",n:"بنك تقليدي"},TMGH:{r:2,s:"فحص",n:"عقارات ومديونية، لازم تفحص نسبة الدين"},FWRY:{r:3,s:"فحص",n:"شركة نمو وتقلبها عالي"}};
-var CH={NVDA:-4.5,MSFT:-0.6,AAPL:-1.2,GOOGL:-3.4,TSLA:-3.4,TMGH:-0.67};
+var CH={NVDA:-4.5,MSFT:-0.6,AAPL:-1.2,GOOGL:-3.4,TSLA:-3.4,TMGH:-0.81,COMI:-0.02};
 document.getElementById("adv").onclick=function(){
 var r=+document.getElementById("rk").value,sh=document.getElementById("sh").checked,D={};
 try{D=JSON.parse(localStorage.getItem("wl")||"{}")}catch(e){}
@@ -208,6 +216,14 @@ out[lv].push(tx+why.join(". "))});
 var h=function(a,i){return a.length?a.map(function(x){return i+" "+x}).join("\n\n")+"\n\n":""};
 document.getElementById("av").textContent=h(out.ok,"✅")+h(out.mid,"⚠️")+h(out.no,"❌")+"قبل أي حاجة: صندوق الطوارئ الأول، وما تستثمرش فلوس محتاجها قريب. ده مساعد تعليمي بقواعد بسيطة، مش نصيحة استثمارية.";
 }})();
+</script>
+<script>
+(function(){var ok=["prices","helper","companies","habits","sharia","plan"];
+function show(){var h=(location.hash||"").slice(1);if(ok.indexOf(h)<0)h="prices";
+document.querySelectorAll("[data-tab]").forEach(function(e){e.classList.toggle("on",e.getAttribute("data-tab")===h)});
+document.querySelectorAll("#tb button").forEach(function(b){b.classList.toggle("on",b.getAttribute("data-go")===h)});}
+document.querySelectorAll("#tb button").forEach(function(b){b.onclick=function(){location.hash=b.getAttribute("data-go");show();window.scrollTo(0,0)}});
+window.addEventListener("hashchange",show);show();})();
 </script>
 </body>
 </html>
