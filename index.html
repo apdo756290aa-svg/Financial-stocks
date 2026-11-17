@@ -1,43 +1,175 @@
-import datetime
-import requests
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>مذكرة الثقافة المالية الشاملة</title>
+<style>
+:root{--bg:#f7f8fa;--card:#fff;--tx:#1b2430;--mut:#5d6b7c;--ac:#0f766e;--ln:#e2e6ec;--hd:#e6f4f2;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#10151c;--card:#18202a;--tx:#e8edf3;--mut:#9aa8b8;--ac:#4fd1c5;--ln:#2a3542;--hd:#1d2c33}}
+:root[data-theme="dark"]{--bg:#10151c;--card:#18202a;--tx:#e8edf3;--mut:#9aa8b8;--ac:#4fd1c5;--ln:#2a3542;--hd:#1d2c33}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--tx);font-family:"Segoe UI",Tahoma,Arial,sans-serif;line-height:1.8;padding:16px}
+main{max-width:820px;margin:auto}
+h1{font-size:1.5rem;margin:8px 0}
+h2{font-size:1.2rem;color:var(--ac);margin:0 0 10px}
+.sub{color:var(--mut);font-size:.9rem}
+section{background:var(--card);border:1px solid var(--ln);border-radius:14px;padding:16px;margin:16px 0}
+.scroll{overflow-x:auto}
+table{border-collapse:collapse;width:100%;min-width:520px;font-size:.9rem}
+th,td{border:1px solid var(--ln);padding:8px;text-align:right;vertical-align:top}
+th{background:var(--hd)}
+.tag{font-size:.75rem;background:var(--hd);color:var(--ac);border-radius:6px;padding:1px 6px}
+ul,ol{padding-inline-start:20px;margin:6px 0}
+.note{font-size:.85rem;color:var(--mut);border-top:1px dashed var(--ln);margin-top:10px;padding-top:8px}
+.ico{font-size:1.4rem}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
+.cd{border:1px solid var(--ln);border-radius:12px;padding:10px;text-align:center}
+.cd svg{width:44px;height:44px;color:var(--ac)}
+.cd b{display:block}.cd small{color:var(--mut)}
+.cd input{width:100%;box-sizing:border-box;margin-top:6px;padding:6px;border:1px solid var(--ln);border-radius:8px;background:var(--bg);color:var(--tx);text-align:center}
+.sn{font-size:.78rem;color:var(--mut);margin-top:6px;line-height:1.5}
+.news li{margin:4px 0}
+.up{color:#15803d;font-weight:700}.dn{color:#dc2626;font-weight:700}
+button{background:var(--ac);color:var(--bg);border:0;border-radius:10px;padding:10px 14px;font-size:1rem;margin-top:10px}
+#ai{white-space:pre-wrap;margin-top:10px}
+</style>
+</head>
+<body>
+<main>
+<h1><span class="ico">📊</span> مذكرة الثقافة المالية الشاملة</h1>
+<p class="sub">نسخة تعليمية، مش نصيحة استثمارية. الأسعار واتجاه الأسهم بيتغير، راجع الأرقام الحية قبل أي قرار.</p>
 
-def fetch_live_financial_updates():
-    today = datetime.datetime.now().strftime("%Y-%m-%d %H:%M")
-    
-    # هنا الكود بيجيب الأخبار والأسعار الحالية (يمكن ربطه بـ API مالي مجاني لاحقاً)
-    market_data = (
-        "• مؤشرات الأسواق اليوم:\n"
-        "  - قطاع الذكاء الاصطناعي (مثل NVIDIA): صاعد بقوة بسبب استمرار الطلب على البنية التحتية.\n"
-        "  - قطاع الحوسبة والسحابة (مثل Microsoft): مستقر وإيرادات قوية.\n"
-        "  - العقارات والتجزئة التقليدية: تحت الضغط بسبب أسعار الفائدة.\n"
-    )
-    
-    actionable_advice = (
-        "• نصيحة السلوك المالي اليوم: التزم بقاعدة الادخار (20%) وتجنب أي شراء عاندي أو استهلاكي بالديون.\n"
-        "• تنبيه شرعي: تأكد دائماً من نقاء الشركات قبل الشراء وعدم الدخول في أي معاملات تعتمد على التداول بالهامش (المارجن)."
-    )
-    
-    updated_content = f"""# مذكرة الثقافة المالية المتجددة (تحديث أوتوماتيكي) 📊
-**آخر تحديث لحظي:** {today}
+<section>
+<h2>📈 لوحة المتابعة والقرار</h2>
+<p class="sub">اكتب سعر السهم الحالي في كل كارت. الصفحة بتحفظه وتقارنه بآخر سعر كتبته وتقولك طالع ⬆️ ولا نازل ⬇️. الرسومات أيقونات عامة للمنظر مش شعارات حقيقية.</p>
+<div class="news"><b>🗞️ تحديث 16 نوفمبر 2026</b>
+<ul>
+<li>إنفيديا: استقال جنسن هوانج من رئاسة الشركة التنفيذية يوم 12 نوفمبر، والسهم نزل بقوة. نتائجها بعد إغلاق الثلاثاء 17 نوفمبر، وأول نتائج من غير هوانج.</li>
+<li>السوق الأمريكي: الأسهم نزلت الاثنين وناسداك خسر أكتر من 2٪ مع بيع في الرقائق. وعوائد السندات فوق 5٪.</li>
+<li>مصر: مؤشر EGX30 كان حوالي 52,483 نقطة يوم 10 نوفمبر، يعني زيادة حوالي 25٪ من أول السنة. ولقيت إن البورصة بدأت عقود مستقبلية على CIB وطلعت مصطفى.</li>
+</ul>
+<small class="sub">أرقام الاثنين لحظية وبتتغير. ولقيتش سعر موثوق ليوم 16 نوفمبر للأسهم المصرية ولا لجوجل.</small></div>
+<div class="grid" id="g"></div>
+<button id="ask" hidden>اسألني: أعمل إيه؟ 🤔</button>
+<div id="ai"></div>
+<div class="note"><b>🔌 تحديث تلقائي (لازم تفتح الملف من جهازك أو موقعك، مش من اللينك)</b><br>
+الصق مفتاح Twelve Data المجاني:<br><input id="key" placeholder="API key" style="width:100%;box-sizing:border-box;padding:6px;margin-top:6px;border:1px solid var(--ln);border-radius:8px;background:var(--bg);color:var(--tx)">
+<button id="live">شغّل التحديث التلقائي</button> <span id="lv"></span></div>
 
----
-### 📈 نبض الأسواق والأسهم:
-{market_data}
+<p class="note">مهم: الصفحة المنشورة مش بتقدر تجيب أسعار حية أو أخبار من الإنترنت لوحدها، فالأسعار بتدخلها إنت. لو عايز تحديث بالأسعار والأخبار الحالية، ابعتلي هنا في المحادثة وأنا أدور وأحدّث. الشرح مش نصيحة استثمارية.</p>
+</section>
+<section>
+<h2>١) الشركات بتبيع إيه، وإيه اللي بيحرك سهمها</h2>
+<h3>🇺🇸 البورصة الأمريكية</h3>
+<div class="scroll"><table>
+<tr><th>الشركة</th><th>بتبيع إيه</th><th>إيه اللي بيحرك السهم</th></tr>
+<tr><td>إنفيديا (NVDA)</td><td>شرائح معالجة رسوميات وذكاء اصطناعي ومراكز بيانات</td><td>الطلب على الذكاء الاصطناعي، وتركّز العملاء الكبار</td></tr>
+<tr><td>مايكروسوفت (MSFT)</td><td>ويندوز، أوفيس، سحابة Azure، لينكدإن</td><td>نمو السحابة وإيرادات اشتراكات متكررة</td></tr>
+<tr><td>آبل (AAPL)</td><td>آيفون، ماك، خدمات (آب ستور، iCloud)</td><td>دورة مبيعات الآيفون ونمو الخدمات</td></tr>
+<tr><td>جوجل / ألفابت (GOOGL)</td><td>إعلانات البحث ويوتيوب، سحابة، أندرويد</td><td>سوق الإعلانات والمنافسة في الذكاء الاصطناعي</td></tr>
+<tr><td>تسلا (TSLA)</td><td>سيارات كهربائية وبطاريات وطاقة شمسية</td><td>أرقام التسليم، هوامش الربح، توقعات المستقبل</td></tr>
+<tr><td>وولمارت / أمازون</td><td>تجزئة وتجارة إلكترونية</td><td>الاستهلاك والتضخم وهوامش الربح</td></tr>
+<tr><td>ريتس عقارية (مثل O)</td><td>تأجير عقارات تجارية وتوزيع إيجارات</td><td>أسعار الفائدة (الفايدة العالية بتضغط عليها)</td></tr>
+</table></div>
 
----
-### ⚖️ الضوابط وسلوكيات اليوم:
-{actionable_advice}
+<h3>🇪🇬 البورصة المصرية</h3>
+<div class="scroll"><table>
+<tr><th>الشركة</th><th>بتبيع إيه</th><th>إيه اللي بيحرك السهم</th></tr>
+<tr><td>البنك التجاري الدولي (COMI)</td><td>خدمات بنكية</td><td>الفايدة والجنيه وجودة القروض</td></tr>
+<tr><td>طلعت مصطفى (TMGH)</td><td>مشروعات عقارية ومجتمعات سكنية</td><td>مبيعات العقار وتضخم أسعار الأراضي والتشطيب</td></tr>
+<tr><td>فوري (FWRY)</td><td>مدفوعات إلكترونية وخدمات مالية رقمية</td><td>نمو المعاملات الرقمية وتنظيمات البنك المركزي</td></tr>
+<tr><td>إديتا (EFID)</td><td>منتجات غذائية (كيك، بسكويت)</td><td>أسعار الخامات وقدرة المستهلك الشرائية</td></tr>
+<tr><td>الشرقية – إيسترن (EAST)</td><td>تبغ وسجائر</td><td>الأسعار والضرائب والاحتكار القانوني</td></tr>
+</table></div>
+<p class="note">ما فيش جدول بيقول "طالع" أو "نازل" ثابت: ده بيتغير يومياً. اللي بنتعلمه هنا هو <b>ليه</b> السهم بيتحرك.</p>
+</section>
 
----
-*تم إنشاء هذا التقرير وتحديثه بواسطة سكريبت أوتوماتيكي خصيصاً لـ رفاعي.*
-"""
-    
-    # حفظ التحديثات في ملف markdown محلي يتحدث لوحده باستمرار
-    filename = "financial_live_memo.md"
-    with open(filename, "w", encoding="utf-8") as f:
-        f.write(updated_content)
-        
-    print(f"[{today}] تم تحديث المذكرة وسحب أحدث بيانات الأسواق بنجاح!")
+<section>
+<h2>٢) السلوكيات المالية اليومية</h2>
+<div class="scroll"><table>
+<tr><th>عادة بتضيع الفلوس</th><th>البديل الذكي</th></tr>
+<tr><td>صرف الدخل كله أول الشهر</td><td>قسّم الدخل أول ما ينزل: احتياجات ~50٪ / رغبات ~30٪ / ادخار واستثمار ~20٪</td></tr>
+<tr><td>الشراء بالتقسيط للحاجات الكمالية</td><td>ادّخر ثم اشتري كاش، واستخدم التقسيط للضروري بس</td></tr>
+<tr><td>بدون صندوق طوارئ</td><td>اجمع من ٣ لـ ٦ شهور مصاريف في حساب سهل السحب</td></tr>
+<tr><td>الاستثمار بفلوس محتاجها قريب</td><td>الاستثمار بالفلوس اللي تقدر تسيبها سنين</td></tr>
+<tr><td>تتبع الخبر والـ "توصيات"</td><td>تحليل بسيط للشركة وخطة ثابتة</td></tr>
+<tr><td>الاحتفاظ بكل الفلوس كاش والتضخم بياكلها</td><td>تنويع: ادخار، ذهب، أسهم، شهادات حسب هدفك</td></tr>
+</table></div>
+</section>
 
-if __name__ == "__main__":
-    fetch_live_financial_updates()
+<section>
+<h2>٣) البوصلة الشرعية</h2>
+<p><b>شروط الأسهم الحلال (المعايير الشائعة):</b></p>
+<ul>
+<li>نشاط الشركة الأساسي مباح (مش بنوك تقليدية، خمور، تبغ، قمار، ترفيه محرم).</li>
+<li>الديون بفوائد أقل من حد معين (غالباً ٣٣٪ من القيمة السوقية أو الأصول حسب المعيار).</li>
+<li>الدخل المحرم (فوائد) أقل من ٥٪ من إجمالي الإيرادات، ويتم تطهيره (التخلص من نسبته).</li>
+</ul>
+<p><b>معاملات تبعد عنها:</b> الاقتراض بفايدة للاستثمار، التداول بالهامش (Margin)، البيع على المكشوف، العقود المستقبلية والخيارات بالمضاربة، والصناديق اللي بتستثمر في فوائد.</p>
+<p class="note">أمثلة: البنك التجاري الدولي (بنك تقليدي) وإيسترن (تبغ) مش مناسبين شرعياً. أي شركة تانية لازم تتراجع على <b>مؤشر EGX 33 الشرعي</b> أو تطبيقات فحص شرعي (مثل Musaffa) أو رأي جهة شرعية موثوقة، لأن الأرقام بتتغير كل ربع سنة.</p>
+</section>
+
+<section>
+<h2>٤) خطة عمل تبدأ بيها النهاردة</h2>
+<ol>
+<li>سجّل مصاريفك أسبوع واحد بس، من غير ما تغيّر حاجة.</li>
+<li>حدد رقم صندوق الطوارئ (مصاريف ٣ شهور) وابدأ بمبلغ شهري ثابت.</li>
+<li>سدّ أي دين بفايدة عالية قبل الاستثمار.</li>
+<li>افتح حساب استثمار بسيط وابدأ بمبلغ صغير (صندوق مؤشر أو سهم أو اتنين بعد فحص شرعي).</li>
+<li>حط تاريخ شهري ثابت للمراجعة، ومتغيّرش خطتك بسبب خبر.</li>
+</ol>
+</section>
+</main>
+<svg width="0" height="0" style="position:absolute"><defs>
+<symbol id="chip" viewBox="0 0 48 48"><rect x="12" y="12" width="24" height="24" rx="3" fill="none" stroke="currentColor" stroke-width="3"/><rect x="19" y="19" width="10" height="10" fill="currentColor"/><path d="M18 6v6M24 6v6M30 6v6M18 36v6M24 36v6M30 36v6M6 18h6M6 24h6M6 30h6M36 18h6M36 24h6M36 30h6" stroke="currentColor" stroke-width="3"/></symbol>
+<symbol id="win" viewBox="0 0 48 48"><g fill="currentColor"><rect x="7" y="7" width="16" height="16" rx="2"/><rect x="25" y="7" width="16" height="16" rx="2"/><rect x="7" y="25" width="16" height="16" rx="2"/><rect x="25" y="25" width="16" height="16" rx="2"/></g></symbol>
+<symbol id="phone" viewBox="0 0 48 48"><rect x="14" y="5" width="20" height="38" rx="5" fill="none" stroke="currentColor" stroke-width="3"/><circle cx="24" cy="37" r="2" fill="currentColor"/></symbol>
+<symbol id="search" viewBox="0 0 48 48"><circle cx="21" cy="21" r="12" fill="none" stroke="currentColor" stroke-width="4"/><path d="M30 30l12 12" stroke="currentColor" stroke-width="4" stroke-linecap="round"/></symbol>
+<symbol id="car" viewBox="0 0 48 48"><path d="M7 30l4-11h26l4 11v7H7z" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/><circle cx="15" cy="37" r="4" fill="currentColor"/><circle cx="33" cy="37" r="4" fill="currentColor"/></symbol>
+<symbol id="bank" viewBox="0 0 48 48"><path d="M24 6L5 17h38z" fill="currentColor"/><path d="M11 21v14M20 21v14M28 21v14M37 21v14M5 40h38" stroke="currentColor" stroke-width="4"/></symbol>
+<symbol id="home" viewBox="0 0 48 48"><path d="M6 24L24 8l18 16M12 21v20h24V21" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/><rect x="20" y="29" width="8" height="12" fill="currentColor"/></symbol>
+<symbol id="pay" viewBox="0 0 48 48"><rect x="6" y="11" width="36" height="26" rx="4" fill="none" stroke="currentColor" stroke-width="3"/><path d="M6 19h36" stroke="currentColor" stroke-width="5"/><rect x="11" y="28" width="12" height="4" fill="currentColor"/></symbol>
+</defs></svg>
+<script>
+(function(){
+var L=[["NVDA","إنفيديا","chip"],["MSFT","مايكروسوفت","win"],["AAPL","آبل","phone"],["GOOGL","جوجل","search"],["TSLA","تسلا","car"],["COMI","التجاري الدولي","bank"],["TMGH","طلعت مصطفى","home"],["FWRY","فوري","pay"]];
+var SN={NVDA:["dn","162.85$ إغلاق 13 نوفمبر (−2.01٪). الاثنين حوالي 155$ (−4.5٪)"],MSFT:["up","523.88$ إغلاق 13 نوفمبر (+0.17٪). الاثنين حوالي −0.6٪"],AAPL:["up","356.27$ إغلاق 13 نوفمبر (+0.39٪). الاثنين حوالي −1.2٪"],GOOGL:["dn","الاثنين حوالي −3.4٪. سعر الإغلاق مش متاكد منه"],TSLA:["dn","390.22$ إغلاق 13 نوفمبر (−1.82٪). الاثنين حوالي −3.4٪"]};
+var D={};try{D=JSON.parse(localStorage.getItem("wl")||"{}")}catch(e){}
+function save(){try{localStorage.setItem("wl",JSON.stringify(D))}catch(e){}}
+function st(t){var d=D[t];if(!d||!d.prev)return d&&d.last?"<small>أول سعر محفوظ</small>":"<small>—</small>";
+var c=(d.last-d.prev)/d.prev*100;return c>=0?'<span class="up">⬆️ طالع '+c.toFixed(2)+'٪</span>':'<span class="dn">⬇️ نازل '+Math.abs(c).toFixed(2)+'٪</span>'}
+var g=document.getElementById("g");
+L.forEach(function(x){var c=document.createElement("div");c.className="cd";
+c.innerHTML='<svg><use href="#'+x[2]+'"/></svg><b>'+x[1]+'</b><small>'+x[0]+'</small><input type="number" step="any" inputmode="decimal" placeholder="السعر الحالي"><div class="s">'+st(x[0])+'</div><div class="sn">'+(SN[x[0]]?(SN[x[0]][0]=="up"?"⬆️ ":"⬇️ ")+SN[x[0]][1]:"مفيش سعر موثوق لسه، اكتبه بنفسك")+'</div>';
+var i=c.querySelector("input"),s=c.querySelector(".s");if(D[x[0]]&&D[x[0]].last)i.value=D[x[0]].last;
+i.addEventListener("change",function(){var v=parseFloat(i.value);if(!(v>0))return;var d=D[x[0]]||{};if(d.last!==v){d.prev=d.last||0;d.last=v}D[x[0]]=d;save();s.innerHTML=st(x[0])});
+g.appendChild(c)});
+var b=document.getElementById("ask"),o=document.getElementById("ai");
+if(window.claude&&claude.use){claude.use("sample").then(function(sm){if(!sm)return;b.hidden=false;
+b.onclick=async function(){var rows=L.filter(function(x){return D[x[0]]&&D[x[0]].last}).map(function(x){var d=D[x[0]];return x[1]+" ("+x[0]+"): السعر "+d.last+(d.prev?" وكان "+d.prev:"")});
+if(!rows.length){o.textContent="اكتب سعر سهم واحد على الأقل الأول.";return}
+o.textContent="بفكر...";
+try{var r=await sm("انت مرشد مالي تعليمي بالعامية المصرية. دي أسعار كتبها المستخدم:\n"+rows.join("\n")+"\nلخّص الاتجاه لكل سهم، واشرح العوامل العامة اللي عادة بتحرك الشركة دي، وقدّم أسئلة يسأل نفسه قبل القرار. ما تألفش أخبار حالية ولا أسعار، وقول إن ده مش نصيحة استثمارية. اختصر في 150 كلمة.",{modelTier:"default",onText:function(t){o.textContent=t.text}});o.textContent=r.text}catch(e){o.textContent="ما قدرتش أجاوب دلوقتي، جرّب تاني."}}}).catch(function(){})}
+})();
+</script>
+
+<script>
+(function(){
+var T=["NVDA","MSFT","AAPL","GOOGL","TSLA"],k=document.getElementById("key"),lv=document.getElementById("lv"),timer=null;
+try{k.value=localStorage.getItem("tdkey")||""}catch(e){}
+async function go(){var key=k.value.trim();if(!key){lv.textContent="اكتب المفتاح";return}
+try{localStorage.setItem("tdkey",key)}catch(e){}
+lv.textContent="بجيب الأسعار...";
+try{var r=await fetch("https://api.twelvedata.com/quote?symbol="+T.join(",")+"&apikey="+encodeURIComponent(key));var j=await r.json();
+if(j.status==="error"||j.code){lv.textContent="خطأ: "+(j.message||"المفتاح غلط");return}
+document.querySelectorAll(".cd").forEach(function(c){var t=c.querySelector("small").textContent,q=j[t];
+if(q&&q.close){var i=c.querySelector("input");i.value=parseFloat(q.close);i.dispatchEvent(new Event("change"))}});
+lv.textContent="اتحدّث "+new Date().toLocaleTimeString("ar-EG")}
+catch(e){lv.textContent="مش قادر أتصل. افتح الملف من جهازك مش من لينك Claude."}}
+document.getElementById("live").onclick=function(){go();clearInterval(timer);timer=setInterval(go,120000)};
+})();
+</script>
+</body>
+</html>
