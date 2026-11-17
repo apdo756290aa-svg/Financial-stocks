@@ -44,14 +44,21 @@ button{background:var(--ac);color:var(--bg);border:0;border-radius:10px;padding:
 <section>
 <h2>📈 لوحة المتابعة والقرار</h2>
 <p class="sub">اكتب سعر السهم الحالي في كل كارت. الصفحة بتحفظه وتقارنه بآخر سعر كتبته وتقولك طالع ⬆️ ولا نازل ⬇️. الرسومات أيقونات عامة للمنظر مش شعارات حقيقية.</p>
-<div class="news"><b>🗞️ تحديث 16 نوفمبر 2026</b>
+<div class="news"><b>🗞️ تحديث 17 نوفمبر 2026 (أسعار إغلاق الاثنين 16)</b>
 <ul>
-<li>إنفيديا: استقال جنسن هوانج من رئاسة الشركة التنفيذية يوم 12 نوفمبر، والسهم نزل بقوة. نتائجها بعد إغلاق الثلاثاء 17 نوفمبر، وأول نتائج من غير هوانج.</li>
+<li>إنفيديا: النهارده الثلاثاء 17 نوفمبر نتائجها بعد إغلاق السوق (حوالي 11:20 مساءً بتوقيت القاهرة)، وهي أول نتائج بعد استقالة جنسن هوانج. كوليت كريس هي الرئيس التنفيذي المؤقت.</li>
 <li>السوق الأمريكي: الأسهم نزلت الاثنين وناسداك خسر أكتر من 2٪ مع بيع في الرقائق. وعوائد السندات فوق 5٪.</li>
 <li>مصر: مؤشر EGX30 كان حوالي 52,483 نقطة يوم 10 نوفمبر، يعني زيادة حوالي 25٪ من أول السنة. ولقيت إن البورصة بدأت عقود مستقبلية على CIB وطلعت مصطفى.</li>
 </ul>
 <small class="sub">أرقام الاثنين لحظية وبتتغير. ولقيتش سعر موثوق ليوم 16 نوفمبر للأسهم المصرية ولا لجوجل.</small></div>
 <div class="grid" id="g"></div>
+<div class="note" style="border-top:0">
+<b>🧭 المساعد: أختار إيه وأبعد عن إيه؟</b><br>
+أنا أقدر أتحمل خسارة:
+<select id="rk" style="padding:6px;border-radius:8px;border:1px solid var(--ln);background:var(--bg);color:var(--tx)"><option value="1">قليلة</option><option value="2" selected>متوسطة</option><option value="3">كبيرة</option></select>
+<label style="margin-inline-start:8px"><input type="checkbox" id="sh" checked> شرعي بس</label><br>
+<button id="adv">ساعدني أختار 🧭</button>
+<div id="av" style="white-space:pre-wrap;margin-top:10px"></div></div>
 <button id="ask" hidden>اسألني: أعمل إيه؟ 🤔</button>
 <div id="ai"></div>
 <div class="note"><b>🔌 تحديث تلقائي (لازم تفتح الملف من جهازك أو موقعك، مش من اللينك)</b><br>
@@ -135,14 +142,15 @@ button{background:var(--ac);color:var(--bg);border:0;border-radius:10px;padding:
 <script>
 (function(){
 var L=[["NVDA","إنفيديا","chip"],["MSFT","مايكروسوفت","win"],["AAPL","آبل","phone"],["GOOGL","جوجل","search"],["TSLA","تسلا","car"],["COMI","التجاري الدولي","bank"],["TMGH","طلعت مصطفى","home"],["FWRY","فوري","pay"]];
-var SN={NVDA:["dn","162.85$ إغلاق 13 نوفمبر (−2.01٪). الاثنين حوالي 155$ (−4.5٪)"],MSFT:["up","523.88$ إغلاق 13 نوفمبر (+0.17٪). الاثنين حوالي −0.6٪"],AAPL:["up","356.27$ إغلاق 13 نوفمبر (+0.39٪). الاثنين حوالي −1.2٪"],GOOGL:["dn","الاثنين حوالي −3.4٪. سعر الإغلاق مش متاكد منه"],TSLA:["dn","390.22$ إغلاق 13 نوفمبر (−1.82٪). الاثنين حوالي −3.4٪"]};
+var SN={NVDA:["dn","162.85$ إغلاق 13 نوفمبر (−2.01٪). الاثنين حوالي 155$ (−4.5٪)"],MSFT:["up","523.88$ إغلاق 13 نوفمبر (+0.17٪). الاثنين حوالي −0.6٪"],AAPL:["up","356.27$ إغلاق 13 نوفمبر (+0.39٪). الاثنين حوالي −1.2٪"],GOOGL:["dn","الاثنين حوالي −3.4٪. سعر الإغلاق مش متاكد منه"],COMI:["nt","128.82 جنيه إغلاق الاثنين 16 نوفمبر"],TMGH:["dn","83.88 جنيه إغلاق الاثنين 16 نوفمبر (−0.67٪)"],TSLA:["dn","390.22$ إغلاق 13 نوفمبر (−1.82٪). الاثنين حوالي −3.4٪"]};
+var EG={COMI:1,TMGH:1,FWRY:1};
 var D={};try{D=JSON.parse(localStorage.getItem("wl")||"{}")}catch(e){}
 function save(){try{localStorage.setItem("wl",JSON.stringify(D))}catch(e){}}
 function st(t){var d=D[t];if(!d||!d.prev)return d&&d.last?"<small>أول سعر محفوظ</small>":"<small>—</small>";
 var c=(d.last-d.prev)/d.prev*100;return c>=0?'<span class="up">⬆️ طالع '+c.toFixed(2)+'٪</span>':'<span class="dn">⬇️ نازل '+Math.abs(c).toFixed(2)+'٪</span>'}
 var g=document.getElementById("g");
 L.forEach(function(x){var c=document.createElement("div");c.className="cd";
-c.innerHTML='<svg><use href="#'+x[2]+'"/></svg><b>'+x[1]+'</b><small>'+x[0]+'</small><input type="number" step="any" inputmode="decimal" placeholder="السعر الحالي"><div class="s">'+st(x[0])+'</div><div class="sn">'+(SN[x[0]]?(SN[x[0]][0]=="up"?"⬆️ ":"⬇️ ")+SN[x[0]][1]:"مفيش سعر موثوق لسه، اكتبه بنفسك")+'</div>';
+c.innerHTML='<svg><use href="#'+x[2]+'"/></svg><b>'+x[1]+'</b><small>'+x[0]+'</small> <span class="tag">'+(EG[x[0]]?"🇪🇬 جنيه":"🇺🇸 دولار")+'</span><input type="number" step="any" inputmode="decimal" placeholder="السعر ب'+(EG[x[0]]?"الجنيه":"الدولار")+'"><div class="s">'+st(x[0])+'</div><div class="sn">'+(SN[x[0]]?(SN[x[0]][0]=="up"?"⬆️ ":SN[x[0]][0]=="dn"?"⬇️ ":"")+SN[x[0]][1]:"مفيش سعر موثوق لسه، اكتبه بنفسك")+'</div>';
 var i=c.querySelector("input"),s=c.querySelector(".s");if(D[x[0]]&&D[x[0]].last)i.value=D[x[0]].last;
 i.addEventListener("change",function(){var v=parseFloat(i.value);if(!(v>0))return;var d=D[x[0]]||{};if(d.last!==v){d.prev=d.last||0;d.last=v}D[x[0]]=d;save();s.innerHTML=st(x[0])});
 g.appendChild(c)});
@@ -166,10 +174,39 @@ try{var r=await fetch("https://api.twelvedata.com/quote?symbol="+T.join(",")+"&a
 if(j.status==="error"||j.code){lv.textContent="خطأ: "+(j.message||"المفتاح غلط");return}
 document.querySelectorAll(".cd").forEach(function(c){var t=c.querySelector("small").textContent,q=j[t];
 if(q&&q.close){var i=c.querySelector("input");i.value=parseFloat(q.close);i.dispatchEvent(new Event("change"))}});
-lv.textContent="اتحدّث "+new Date().toLocaleTimeString("ar-EG")}
+lv.textContent="اتحدّث "+new Date().toLocaleTimeString("ar-EG");
+try{var r2=await fetch("https://api.twelvedata.com/quote?symbol=COMI,TMGH,FWRY&exchange=EGX&apikey="+encodeURIComponent(key));var j2=await r2.json(),n=0;
+document.querySelectorAll(".cd").forEach(function(c){var t=c.querySelector("small").textContent,q=j2[t]||(j2.symbol===t?j2:null);if(q&&q.close){var i=c.querySelector("input");i.value=parseFloat(q.close);i.dispatchEvent(new Event("change"));n++}});
+if(!n)lv.textContent+=" (الأسهم المصرية مش متاحة بالخطة المجانية، اكتبها بإيدك)"}catch(e){}}
 catch(e){lv.textContent="مش قادر أتصل. افتح الملف من جهازك مش من لينك Claude."}}
 document.getElementById("live").onclick=function(){go();clearInterval(timer);timer=setInterval(go,120000)};
 })();
+</script>
+<script>
+(function(){
+var N={NVDA:"إنفيديا",MSFT:"مايكروسوفت",AAPL:"آبل",GOOGL:"جوجل",TSLA:"تسلا",COMI:"التجاري الدولي",TMGH:"طلعت مصطفى",FWRY:"فوري"};
+var EGX={COMI:1,TMGH:1,FWRY:1};
+var P={NVDA:{r:3,s:"غالباً",n:"نتائجها 17 نوفمبر ممكن تقلب السهم"},MSFT:{r:2,s:"غالباً"},AAPL:{r:2,s:"غالباً"},GOOGL:{r:2,s:"غالباً"},TSLA:{r:3,s:"غالباً"},COMI:{r:2,s:"لا",n:"بنك تقليدي"},TMGH:{r:2,s:"فحص",n:"عقارات ومديونية، لازم تفحص نسبة الدين"},FWRY:{r:3,s:"فحص",n:"شركة نمو وتقلبها عالي"}};
+var CH={NVDA:-4.5,MSFT:-0.6,AAPL:-1.2,GOOGL:-3.4,TSLA:-3.4,TMGH:-0.67};
+document.getElementById("adv").onclick=function(){
+var r=+document.getElementById("rk").value,sh=document.getElementById("sh").checked,D={};
+try{D=JSON.parse(localStorage.getItem("wl")||"{}")}catch(e){}
+var out={ok:[],mid:[],no:[]};
+Object.keys(P).forEach(function(t){var p=P[t],d=D[t],c=CH[t];
+if(d&&d.prev>0)c=(d.last-d.prev)/d.prev*100;
+var cur=EGX[t]?"جنيه":"دولار",tx=N[t]+" ("+t+", بالـ"+cur+"): ",why=[],lv="ok";
+if(sh&&p.s==="لا"){lv="no";why.push("مش شرعي: "+p.n)}
+else{if(sh&&p.s==="فحص"){lv="mid";why.push("اتأكد شرعياً الأول. "+(p.n||""))}
+if(sh&&p.s==="غالباً")why.push("غالباً بيعدّي الفحص الشرعي، بس اتأكد من تطبيق فحص");
+if(p.r>r){lv="no";why.push("تقلبه أعلى من اللي بتتحمله")}
+else if(p.r===r&&lv==="ok"){lv="mid";why.push("مناسب بس بمبلغ صغير")}
+else if(lv==="ok")why.push("مناسب لتحملك");
+if(c!=null&&c<=-3){if(lv==="ok")lv="mid";why.push("نازل حوالي "+Math.abs(c).toFixed(1)+"٪ النهاردة، استنى ومتشتريش تحت الضغط")}
+if(p.n&&p.s!=="لا"&&p.s!=="فحص")why.push(p.n)}
+out[lv].push(tx+why.join(". "))});
+var h=function(a,i){return a.length?a.map(function(x){return i+" "+x}).join("\n\n")+"\n\n":""};
+document.getElementById("av").textContent=h(out.ok,"✅")+h(out.mid,"⚠️")+h(out.no,"❌")+"قبل أي حاجة: صندوق الطوارئ الأول، وما تستثمرش فلوس محتاجها قريب. ده مساعد تعليمي بقواعد بسيطة، مش نصيحة استثمارية.";
+}})();
 </script>
 </body>
 </html>
