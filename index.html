@@ -66,10 +66,10 @@ button{background:var(--ac);color:var(--bg);border:0;border-radius:10px;padding:
 <section data-tab="helper">
 <h2>🧭 المساعد</h2>
 <div class="note" style="border-top:0">
-<b>🧭 المساعد: أختار إيه وأبعد عن إيه؟</b><br>
-أنا أقدر أتحمل خسارة:
-<select id="rk" style="padding:6px;border-radius:8px;border:1px solid var(--ln);background:var(--bg);color:var(--tx)"><option value="1">قليلة</option><option value="2" selected>متوسطة</option><option value="3">كبيرة</option></select>
-<label style="margin-inline-start:8px"><input type="checkbox" id="sh" checked> شرعي بس</label><br>
+<b>🧭 المساعد: انت تختار وأنا أساعدك</b><br>
+السوق: <select id="mk" style="padding:6px;border-radius:8px;border:1px solid var(--ln);background:var(--bg);color:var(--tx)"><option value="all">كله</option><option value="eg">🇪🇬 مصر</option><option value="us">🇺🇸 أمريكا</option><option value="jp">🇯🇵 اليابان</option></select><br>
+هدفي: <select id="gl" style="padding:6px;border-radius:8px;border:1px solid var(--ln);background:var(--bg);color:var(--tx)"><option value="3" selected>أكسب أكتر (جريء)</option><option value="2">متوازن</option><option value="1">أحمي فلوسي</option></select><br>
+<label><input type="checkbox" id="sh"> شرعي بس</label><br>
 <button id="adv">ساعدني أختار 🧭</button>
 <div id="av" style="white-space:pre-wrap;margin-top:10px"></div></div>
 <button id="ask" hidden>اسألني: أعمل إيه؟ 🤔</button>
@@ -149,16 +149,16 @@ button{background:var(--ac);color:var(--bg);border:0;border-radius:10px;padding:
 </defs></svg>
 <script>
 (function(){
-var L=[["NVDA","إنفيديا","chip"],["MSFT","مايكروسوفت","win"],["AAPL","آبل","phone"],["GOOGL","جوجل","search"],["TSLA","تسلا","car"],["COMI","التجاري الدولي","bank"],["TMGH","طلعت مصطفى","home"],["FWRY","فوري","pay"]];
+var L=[["NVDA","إنفيديا","chip"],["MSFT","مايكروسوفت","win"],["AAPL","آبل","phone"],["GOOGL","جوجل","search"],["TSLA","تسلا","car"],["COMI","التجاري الدولي","bank"],["TMGH","طلعت مصطفى","home"],["FWRY","فوري","pay"],["7203","تويوتا","car"],["6758","سوني","win"],["7974","نينتندو","phone"],["9984","سوفت بنك","chip"]];
 var SN={NVDA:["dn","162.85$ إغلاق 13 نوفمبر (−2.01٪). الاثنين حوالي 155$ (−4.5٪)"],MSFT:["up","523.88$ إغلاق 13 نوفمبر (+0.17٪). الاثنين حوالي −0.6٪"],AAPL:["up","356.27$ إغلاق 13 نوفمبر (+0.39٪). الاثنين حوالي −1.2٪"],GOOGL:["dn","الاثنين حوالي −3.4٪. سعر الإغلاق مش متاكد منه"],COMI:["dn","128.79 جنيه الثلاثاء 17 نوفمبر الصبح (−0.02٪)"],TMGH:["dn","83.20 جنيه الثلاثاء 17 نوفمبر الصبح (−0.81٪)"],TSLA:["dn","390.22$ إغلاق 13 نوفمبر (−1.82٪). الاثنين حوالي −3.4٪"]};
-var EG={COMI:1,TMGH:1,FWRY:1};
+var EG={COMI:1,TMGH:1,FWRY:1};var JP={"7203":1,"6758":1,"7974":1,"9984":1};
 var D={};try{D=JSON.parse(localStorage.getItem("wl")||"{}")}catch(e){}
 function save(){try{localStorage.setItem("wl",JSON.stringify(D))}catch(e){}}
 function st(t){var d=D[t];if(!d||!d.prev)return d&&d.last?"<small>أول سعر محفوظ</small>":"<small>—</small>";
 var c=(d.last-d.prev)/d.prev*100;return c>=0?'<span class="up">⬆️ طالع '+c.toFixed(2)+'٪</span>':'<span class="dn">⬇️ نازل '+Math.abs(c).toFixed(2)+'٪</span>'}
 var g=document.getElementById("g");
 L.forEach(function(x){var c=document.createElement("div");c.className="cd";
-c.innerHTML='<svg><use href="#'+x[2]+'"/></svg><b>'+x[1]+'</b><small>'+x[0]+'</small> <span class="tag">'+(EG[x[0]]?"🇪🇬 جنيه":"🇺🇸 دولار")+'</span><input type="number" step="any" inputmode="decimal" placeholder="السعر ب'+(EG[x[0]]?"الجنيه":"الدولار")+'"><div class="s">'+st(x[0])+'</div><div class="sn">'+(SN[x[0]]?(SN[x[0]][0]=="up"?"⬆️ ":SN[x[0]][0]=="dn"?"⬇️ ":"")+SN[x[0]][1]:"مفيش سعر موثوق لسه، اكتبه بنفسك")+'</div>';
+c.innerHTML='<svg><use href="#'+x[2]+'"/></svg><b>'+x[1]+'</b><small>'+x[0]+'</small> <span class="tag">'+(EG[x[0]]?"🇪🇬 جنيه":JP[x[0]]?"🇯🇵 ين":"🇺🇸 دولار")+'</span><input type="number" step="any" inputmode="decimal" placeholder="السعر ب'+(EG[x[0]]?"الجنيه":JP[x[0]]?"الين":"الدولار")+'"><div class="s">'+st(x[0])+'</div><div class="sn">'+(SN[x[0]]?(SN[x[0]][0]=="up"?"⬆️ ":SN[x[0]][0]=="dn"?"⬇️ ":"")+SN[x[0]][1]:"مفيش سعر موثوق لسه، اكتبه بنفسك")+'</div>';
 var i=c.querySelector("input"),s=c.querySelector(".s");if(D[x[0]]&&D[x[0]].last)i.value=D[x[0]].last;
 i.addEventListener("change",function(){var v=parseFloat(i.value);if(!(v>0))return;var d=D[x[0]]||{};if(d.last!==v){d.prev=d.last||0;d.last=v}D[x[0]]=d;save();s.innerHTML=st(x[0])});
 g.appendChild(c)});
@@ -193,29 +193,35 @@ document.getElementById("live").onclick=function(){go();clearInterval(timer);tim
 </script>
 <script>
 (function(){
-var N={NVDA:"إنفيديا",MSFT:"مايكروسوفت",AAPL:"آبل",GOOGL:"جوجل",TSLA:"تسلا",COMI:"التجاري الدولي",TMGH:"طلعت مصطفى",FWRY:"فوري"};
-var EGX={COMI:1,TMGH:1,FWRY:1};
-var P={NVDA:{r:3,s:"غالباً",n:"نتائجها 17 نوفمبر ممكن تقلب السهم"},MSFT:{r:2,s:"غالباً"},AAPL:{r:2,s:"غالباً"},GOOGL:{r:2,s:"غالباً"},TSLA:{r:3,s:"غالباً"},COMI:{r:2,s:"لا",n:"بنك تقليدي"},TMGH:{r:2,s:"فحص",n:"عقارات ومديونية، لازم تفحص نسبة الدين"},FWRY:{r:3,s:"فحص",n:"شركة نمو وتقلبها عالي"}};
+var N={NVDA:"إنفيديا",MSFT:"مايكروسوفت",AAPL:"آبل",GOOGL:"جوجل",TSLA:"تسلا",COMI:"التجاري الدولي",TMGH:"طلعت مصطفى",FWRY:"فوري","7203":"تويوتا","6758":"سوني","7974":"نينتندو","9984":"سوفت بنك"};
+var MK={eg:["COMI","TMGH","FWRY"],us:["NVDA","MSFT","AAPL","GOOGL","TSLA"],jp:["7203","6758","7974","9984"]};
+var CU={eg:"جنيه",us:"دولار",jp:"ين"};
+var P={NVDA:{g:3,r:3,s:"غالباً",n:"نتائجها النهارده بعد الإغلاق وممكن تحرك السهم بقوة"},MSFT:{g:2,r:2,s:"غالباً"},AAPL:{g:2,r:1,s:"غالباً"},GOOGL:{g:2,r:2,s:"غالباً"},TSLA:{g:3,r:3,s:"غالباً"},COMI:{g:2,r:2,s:"لا",n:"بنك تقليدي"},TMGH:{g:2,r:2,s:"فحص",n:"عقارات ومديونية"},FWRY:{g:3,r:3,s:"فحص",n:"شركة نمو وتقلبها عالي"},"7203":{g:1,r:1,s:"فحص",n:"عربيات وفيها نشاط تمويل"},"6758":{g:2,r:2,s:"فحص",n:"عندها نشاط مالي وتأمين"},"7974":{g:2,r:2,s:"غالباً"},"9984":{g:3,r:3,s:"فحص",n:"استثمارات وديون عالية"}};
 var CH={NVDA:-4.5,MSFT:-0.6,AAPL:-1.2,GOOGL:-3.4,TSLA:-3.4,TMGH:-0.81,COMI:-0.02};
+function mkOf(t){return MK.eg.indexOf(t)>=0?"eg":MK.jp.indexOf(t)>=0?"jp":"us"}
 document.getElementById("adv").onclick=function(){
-var r=+document.getElementById("rk").value,sh=document.getElementById("sh").checked,D={};
+var m=document.getElementById("mk").value,gl=+document.getElementById("gl").value,sh=document.getElementById("sh").checked,D={};
 try{D=JSON.parse(localStorage.getItem("wl")||"{}")}catch(e){}
-var out={ok:[],mid:[],no:[]};
-Object.keys(P).forEach(function(t){var p=P[t],d=D[t],c=CH[t];
-if(d&&d.prev>0)c=(d.last-d.prev)/d.prev*100;
-var cur=EGX[t]?"جنيه":"دولار",tx=N[t]+" ("+t+", بالـ"+cur+"): ",why=[],lv="ok";
-if(sh&&p.s==="لا"){lv="no";why.push("مش شرعي: "+p.n)}
-else{if(sh&&p.s==="فحص"){lv="mid";why.push("اتأكد شرعياً الأول. "+(p.n||""))}
-if(sh&&p.s==="غالباً")why.push("غالباً بيعدّي الفحص الشرعي، بس اتأكد من تطبيق فحص");
-if(p.r>r){lv="no";why.push("تقلبه أعلى من اللي بتتحمله")}
-else if(p.r===r&&lv==="ok"){lv="mid";why.push("مناسب بس بمبلغ صغير")}
-else if(lv==="ok")why.push("مناسب لتحملك");
-if(c!=null&&c<=-3){if(lv==="ok")lv="mid";why.push("نازل حوالي "+Math.abs(c).toFixed(1)+"٪ النهاردة، استنى ومتشتريش تحت الضغط")}
-if(p.n&&p.s!=="لا"&&p.s!=="فحص")why.push(p.n)}
-out[lv].push(tx+why.join(". "))});
-var h=function(a,i){return a.length?a.map(function(x){return i+" "+x}).join("\n\n")+"\n\n":""};
-document.getElementById("av").textContent=h(out.ok,"✅")+h(out.mid,"⚠️")+h(out.no,"❌")+"قبل أي حاجة: صندوق الطوارئ الأول، وما تستثمرش فلوس محتاجها قريب. ده مساعد تعليمي بقواعد بسيطة، مش نصيحة استثمارية.";
-}})();
+var keys=m==="all"?MK.eg.concat(MK.us,MK.jp):MK[m],rows=[],ex=[];
+keys.forEach(function(t){var p=P[t],d=D[t],c=CH[t];if(d&&d.prev>0)c=(d.last-d.prev)/d.prev*100;
+var head=N[t]+" ("+t+", بالـ"+CU[mkOf(t)]+"): ";
+if(sh&&p.s==="لا"){ex.push("❌ "+head+"مش شرعي ("+p.n+")، استبعدته");return}
+var sc=gl===3?p.g*3+p.r:gl===2?p.g*2+(4-p.r):(4-p.r)*2+p.g,w=[];
+if(gl===3){w.push(p.g===3?"فرصة نمو عالية. ممكن يكسب كتير وممكن يخسر كتير":p.g===2?"نمو متوسط":"نمو بطيء، مش هيكسبك كتير")}
+else if(gl===1){w.push(p.r===1?"ثابت نسبياً":p.r===3?"متقلب، مش الأنسب لحماية فلوسك":"تقلبه متوسط")}
+else w.push(p.g>=2&&p.r<=2?"توازن كويس بين النمو والخطر":p.g===3?"نمو عالي بس تقلبه عالي":"أهدى من غيره");
+if(p.n&&p.s!=="لا")w.push(p.n);
+if(sh&&p.s==="فحص")w.push("اتأكد شرعياً الأول");
+if(sh&&p.s==="غالباً")w.push("غالباً بيعدّي الفحص الشرعي، اتأكد من تطبيق فحص");
+if(c!=null&&c<=-3)w.push("نازل حوالي "+Math.abs(c).toFixed(1)+"٪ النهارده. ممكن فرصة، وممكن يكمل نزول، فاستنى تهدى");
+else if(c!=null&&c>=3)w.push("طالع حوالي "+c.toFixed(1)+"٪، خد بالك من إنك تلحقه متأخر");
+rows.push({sc:sc,t:head+w.join(". ")})});
+rows.sort(function(a,b){return b.sc-a.sc});
+var n=rows.length,top=Math.ceil(n/3),low=Math.floor(n*2/3);
+var out=rows.map(function(r,i){return(i<top?"✅ ":i<low?"👍 ":"😐 ")+r.t}).join("\n\n");
+if(ex.length)out+="\n\n"+ex.join("\n\n");
+document.getElementById("av").textContent=(out||"مفيش أسهم في السوق ده.")+"\n\nالترتيب تقديرات مني للفرصة والخطر، مش تحليل مالي. الربح الكبير معناه إن الخسارة كمان ممكن تكبر، فادخل بمبلغ تقدر تخسره، مش بفلوس محتاجها. ده مش نصيحة استثمارية."}
+})();
 </script>
 <script>
 (function(){var ok=["prices","helper","companies","habits","sharia","plan"];
